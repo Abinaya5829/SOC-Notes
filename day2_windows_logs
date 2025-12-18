@@ -10,5 +10,5 @@ The evidence is the recorded logs.
 # File System:
 Files stored in user directories like downloads,documents and etc is normal.
 files are stored in temp and changes in our directory is malware.
-The evidence is files stored logs and file name changes. 
+The evidence is files stored logs and rename logs and timestamp correlation. 
   
