@@ -1,0 +1,14 @@
+# The Windows\System32 Folders:
+Rarely changes in the os is normal. But frequent files creation(.exe) is abnormal.
+The evidence is a new file(.exe) appears in windows folder and alerts.
+  
+# Task Manager:
+Common Windows and known process running. Predictable CPU and memory usage is normal. 
+unkown process and high memory usage can indicate malicious.
+The evidence is the recorded logs.
+
+# File System:
+Files stored in user directories like downloads,documents and etc is normal.
+files are stored in temp and changes in our directory is malware.
+The evidence is files stored logs and file name changes. 
+  
