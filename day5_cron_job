@@ -1,0 +1,22 @@
+# Attacker Goal:
+Attackers can try to persistence with automated execution to gain access and compromised to the system for executing cron jobs.
+After they get a access to sensitive area from the system. and they execute their payloads and malicious activities without manual.
+
+# How the Attack Works:
+Attackers gain the access and compromised the system. they execute the malicious script into the system files/path and modify the existing file.
+after the cron can create the backdoors for attacker. it can command at specific interval to attacker.
+
+# Normal Behavior:
+cron job are used for legitimate user. it execute the automate process at specific interval( system backups,cleaning temp files and etc)
+basically it used the crontab file. it specify the command to run and schedule.
+
+# Suspicious Behavior:
+The presence of cron jobs that execute scripts or commands not recognized by system administrators.
+the cron job can modify the existing file without user knowledge.
+
+# The evidence:
+The creation and modification of cron jobs(/etc/crontab, /etc/cron.d/, /var/spool/cron/crontabs/, crontab -l)
+File modification timestamps. excution patterns of cron job can be flagged for investigation(wildcard injection,path hijacking).
+  
+
+  
