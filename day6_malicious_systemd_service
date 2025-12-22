@@ -1,0 +1,22 @@
+# Malicious systemd service:
+It used by attackers to maintain persistence on compromised Linux systems, allowing them to execute malicious payloads even after reboots.
+
+# Attacker goal:
+Attacker aim is to establish the malicious payloads into compromized system it runs automately when the system reboot.
+
+# How the attack works:
+Attackers can create or modify the service files like /etc/systemd/system/ or /lib/systemd/system/.
+It successfully excecute into the compromised system and run it when the system get stratup.
+The malicious script can execute the unauthorized access to attacker. but the systemd service can execute always when the system stratup/reboot.
+
+#  Normal behaviour:
+Legitimate systemd services are well-documented, have clear names, and execute known binaries or scripts located in standard directories.
+They are managed by system administrators and are essential for system operations (e.g., sshd.service for SSH access).
+
+# Suspicious behaviour:
+Malicious service files have unuasal names in non standard location.and it execute script that perform unexpected actions.Services executing binaries
+from /tmp, /home, or hidden directories.
+
+# The evidence:
+The service enumeration involues to identify active services and look for suspicious.analysis the log, service file investigation and do behavioral analysis. 
+Enumerating enabled services using: systemctl list-unit-files,Service unit files(/etc/systemd/system/, /lib/systemd/system/, Logs from /var/log/syslog)
