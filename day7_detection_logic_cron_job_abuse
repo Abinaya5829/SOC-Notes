@@ -1,0 +1,31 @@
+# Detection of Cron Job Abuse
+# What is detected:
+Unauthorized creation or modification of cron jobs by non-admin users.Execution of scripts from non-standard or suspicious paths
+Cron jobs linked to uncommon binaries or abnormal parent processes. Persistence attempts via scheduled tasks
+
+# Data source:
+System Logs:
+Cron-specific logs: /var/log/cron (records cron job execution events) /var/log/syslog or /var/log/messages (depending on distro, captures cron activity).
+Authentication logs: /var/log/auth.log (tracks user logins, privilege escalations, and sudo usage)
+File Integrity Monitoring (FIM): Monitored files/directories: /etc/crontab, /etc/cron.d/, /etc/cron.daily/, /etc/cron.hourly/, /etc/cron.weekly/, /etc/cron.monthly/
+Endpoint Detection & Response (EDR) Telemetry: Collected data: Process GUIDs, parent-child relationships, Command-line arguments (e.g., crontab -e, crontab -l), Binary execution paths (e.g., /tmp/malware.sh)
+Audit Frameworks: Linux auditd rules: Monitor open, write, execve syscalls on cron-related files
+SIEM Platforms: Collect logs from syslog, EDR, FIM, auditd  
+  
+# Detection logic:
+IF a cron file is modified AND user ≠ admin/root.
+IF cron executes a script from a non-standard path (e.g., /tmp, /dev/shm, user home dirs).
+IF cron job creation originates from abnormal parent process (e.g., python, bash spawned by malware).
+IF cron job executes uncommon binaries at scheduled intervals.
+
+# False positives:
+Legitimate application updates that temporarily use cron jobs. System maintenance scripts deployed by authorized automation tools.
+Developers testing scheduled tasks in non-standard directories. Misconfigured but benign cron jobs.
+
+# SOC response:
+Investigate: Review the modified cron entry, user context, and script path
+Contain: Disable or remove unauthorized cron jobs immediately
+Eradicate: Identify and remove malicious binaries/scripts linked to the cron job
+Recover: Restore baseline cron configuration from backups
+Prevent: Enforce strict access controls, audit cron jobs regularly, and maintain allowlists of approved scripts  
+  
